@@ -1,0 +1,142 @@
+from django.core.validators import validate_comma_separated_integer_list
+from django.db import models
+
+
+# Create your models here.
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    short_name = models.CharField(max_length=100)
+    uid = models.CharField(max_length=100)
+    code = models.CharField(max_length=100)
+    category = models.CharField(max_length=100)
+    type = models.CharField(max_length=100)
+    level = models.CharField(max_length=100)
+    currency = models.CharField(max_length=100)
+    tel = models.PositiveIntegerField()
+    website = models.URLField()
+    # parent = models.ForeignKey("Company", on_delete=models.CASCADE, related_name="company_parent")
+    parent = models.CharField(max_length=100)
+    area = models.CharField(max_length=100)
+    employees = models.PositiveIntegerField()
+    revenue = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField()
+    # owner = models.ForeignKey("User", on_delete=models.CASCADE, related_name="company_owner")
+    owner = models.CharField(max_length=100)
+
+    # division = models.CharField(max_length=100)
+    # billing_address = models.CharField(max_length=100)
+    # postal_address = models.CharField(max_length=100)
+    # creator = models.ForeignKey("User", on_delete=models.CASCADE, related_name="company_creator")
+    # create_time = models.DateTimeField()
+    # modifier = models.ForeignKey("User", on_delete=models.CASCADE, related_name="company_modifier")
+    # modify_time = models.DateTimeField()
+    # contacts = models.ManyToManyField("Guest", related_name="company_contacts")
+    # chances = models.ManyToManyField("Chance", related_name="company_chances")
+    # live_activities = models.ManyToManyField("Activity", related_name="company_live_activities")
+    # end_activities = models.ManyToManyField("Activity", related_name="company_end_activities")
+    # notes = models.ManyToManyField("Note", related_name="company_notes")
+    # followers = models.ManyToManyField("User", related_name="company_followers")
+
+
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+    department = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    superior = models.ForeignKey("Person", on_delete=models.CASCADE)
+    about = models.TextField()
+    email = models.EmailField()
+    tel = models.PositiveIntegerField()
+    mobile = models.PositiveIntegerField()
+    fax = models.PositiveIntegerField()
+    company = models.ForeignKey("Company", on_delete=models.CASCADE)
+    followers = models.ManyToManyField("Person", related_name="person_followers")
+    birthday = models.DateField()
+
+
+class User(Person):
+    nick = models.CharField(max_length=100)
+    image = models.ImageField()
+    follows = models.ManyToManyField("Person", related_name="user_follows")
+
+
+class Guest(Person):
+    level = models.PositiveIntegerField()
+    call = models.BooleanField()
+
+
+class Chance(models.Model):
+    name = models.CharField(max_length=100)
+    company = models.ForeignKey("Company", on_delete=models.CASCADE, related_name="chance_company")
+    end_date = models.DateField()
+    type = models.CharField(max_length=100)
+    owner = models.ForeignKey("User", models.CASCADE, related_name="chance_owner")
+    input = models.CharField(validators=[validate_comma_separated_integer_list], max_length=100)
+    output = models.CharField(validators=[validate_comma_separated_integer_list], max_length=100)
+    unit_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField()
+    lost_reason = models.CharField(max_length=100)
+    rd = models.CharField(max_length=100)
+    accept = models.CharField(max_length=100)
+    manufacturer = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+    possibility = models.PositiveIntegerField()
+    expect_revenue = models.DecimalField(max_digits=10, decimal_places=2)
+    gross_profit = models.PositiveIntegerField()
+    expect_profit = models.DecimalField(max_digits=10, decimal_places=2)
+    weight = models.PositiveIntegerField()
+    description = models.TextField()
+    sales_region = models.CharField(max_length=100)
+    product_line = models.CharField(max_length=100)
+    factory_location = models.CharField(max_length=100)
+    currency = models.CharField(max_length=100)
+    field = models.CharField(max_length=100)
+    dev_type = models.CharField(max_length=100)
+    warranty = models.FloatField()
+    lifetime = models.FloatField()
+    sro_id = models.CharField(max_length=100)
+    sap_product_number = models.CharField(max_length=100)
+    sro_owner = models.ForeignKey("User", on_delete=models.CASCADE, related_name="chance_sro_owner")
+    rd_engineer = models.ForeignKey("User", on_delete=models.CASCADE, related_name="chance_rd_engineer")
+    rd_manager = models.ForeignKey("User", on_delete=models.CASCADE, related_name="chance_rd_manager")
+    product_manager = models.ForeignKey("User", on_delete=models.CASCADE, related_name="chance_product_manager")
+    rd_estimate_material_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    expect_sample_finish_date = models.DateField()
+    sample_finish_date = models.DateField()
+    rd_notes = models.TextField()
+    comp_quantity = models.PositiveIntegerField()
+    comp_price = models.DecimalField(max_digits=10, decimal_places=2)
+    comp_description = models.TextField()
+    milestone_quote = models.DateField()
+    milestone_quote_note = models.TextField()
+    milestone_sample = models.DateField()
+    milestone_sample_note = models.TextField()
+    milestone_production = models.DateField()
+    milestone_production_note = models.TextField()
+    milestone_cert = models.DateField()
+    milestone_cert_note = models.TextField()
+    milestone_shipping = models.DateField()
+    milestone_shipping_note = models.TextField()
+    milestone_next = models.CharField(max_length=100)
+    creator = models.ForeignKey("User", on_delete=models.CASCADE, related_name="chance_creator")
+    modifier = models.ForeignKey("User", on_delete=models.CASCADE, related_name="chance_modifier")
+
+
+class Note(models.Model):
+    name = models.CharField(max_length=100)
+    content = models.TextField()
+    file = models.FileField()
+
+
+class Activity(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    due_date = models.DateField()
+    priority = models.BooleanField()
+    currency = models.CharField(max_length=100)
+    owner = models.ForeignKey("User", on_delete=models.CASCADE, related_name="activity_owner")
+    status = models.CharField(max_length=100)
+    target = models.ForeignKey("Guest", on_delete=models.CASCADE, related_name="activity_target")
+    notes = models.ManyToManyField("Note", related_name="activity_notes")
