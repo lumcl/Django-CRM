@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'crm/css/notice.css' %}">
+</head>
+<body>
+<header class="box-shadow">
+    <span class="notice-name">{{ name }}</span>
+</header>
+<main class="box-shadow">
+    {{ content|safe }}
+</main>
+</body>
+</html>

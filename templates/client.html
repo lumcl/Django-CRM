@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Clients</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'crm/css/client.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/fontawesome-all.css' %}">
+</head>
+<body>
+{% include "header.html" %}
+<main>
+    {% include "menu.html" %}
+    <div class="client-header box-shadow">
+        <span class="client-action">{{ action }}</span>
+        <div class="client-button" onclick="window.location='/newClient/';">New</div>
+    </div>
+    <div class="client-main">
+        {% for client in clients %}
+            <div class="client-row">
+                <span class="client-name"
+                      onclick="window.location='/viewClient/?id={{ client.uid }}';">{{ client.name }}</span>
+                <span class="client-code"
+                      onclick="window.location='/viewClient/?id={{ client.uid }}';">{{ client.code }}</span>
+                <span class="client-edit" onclick="window.location='/editClient/?id={{ client.uid }}';">Edit</span>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+</body>
+</html>

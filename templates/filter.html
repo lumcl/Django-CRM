@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'crm/css/client.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/fontawesome-all.css' %}">
+</head>
+<body>
+{% include "header.html" %}
+<main>
+    {% include "menu.html" %}
+    {% for i in results %}
+        <div class="client-main">
+            <div class="client-row">
+                <span class="client-name"
+                      onclick="window.location='/viewClient/?id={{ client.uid }}';">{{ i.name }}</span>
+                <span class="client-code"
+                      onclick="window.location='/viewClient/?id={{ client.uid }}';">{{ i.code }}</span>
+                <span class="client-edit" onclick="window.location='/editClient/?id={{ i.uid }}';">Edit</span>
+            </div>
+        </div>
+    {% endfor %}
+</main>
+</body>
+</html>

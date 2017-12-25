@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Clients</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'crm/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/view-client-form.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/fontawesome-all.css' %}">
+    <script src="{% static 'crm/js/main.js' %}"></script>
+</head>
+<body>
+{% include "header.html" %}
+<main>
+    {% include "menu.html" %}
+    <div class="view-client-main">
+        <div class="view-client-detail">
+            <span class="view-client-detail-title">Details</span>
+            <div class="view-client-detail-left">
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Client name</span>
+                    <span class="view-client-detail-value">{{ client.name }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Short name</span>
+                    <span class="view-client-detail-value">{{ client.short_name }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Client ID</span>
+                    <span class="view-client-detail-value">{{ client.uid }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Code</span>
+                    <span class="view-client-detail-value">{{ client.code }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Client category</span>
+                    <span class="view-client-detail-value"
+                          onclick="window.location='/filter/?name=category&value={{ client.category }}';">{{ client.category }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Client type</span>
+                    <span class="view-client-detail-value"
+                          onclick="window.location='/filter/?name=type&value={{ client.type }}';">{{ client.type }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Level</span>
+                    <span class="view-client-detail-value"
+                          onclick="window.location='/filter/?name=level&value={{ client.level }}';">{{ client.level }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Currency</span>
+                    <span class="view-client-detail-value"
+                          onclick="window.location='/filter/?name=currency&value={{ client.currency }}';">{{ client.currency }}</span>
+                </div>
+            </div>
+            <div class="view-client-detail-right">
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Tel</span>
+                    <span class="view-client-detail-value">{{ client.tel }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Website</span>
+                    <span class="view-client-detail-value">{{ client.website }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Parent</span>
+                    <span class="view-client-detail-value"
+                          onclick="window.location='/filter/?name=parent&value={{ client.parent }}';">{{ client.parent }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Industrial area</span>
+                    <span class="view-client-detail-value"
+                          onclick="window.location='/filter/?name=area&value={{ client.area }}';">{{ client.area }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Number of employees</span>
+                    <span class="view-client-detail-value">{{ client.employees }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Revenue</span>
+                    <span class="view-client-detail-value">{{ client.revenue }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Description</span>
+                    <span class="view-client-detail-value">{{ client.description }}</span>
+                </div>
+                <div class="view-client-detail-item">
+                    <span class="view-client-detail-name">Client owner</span>
+                    <span class="view-client-detail-value"
+                          onclick="window.location='/filter/?name=owner&value={{ client.owner }}';">{{ client.owner }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

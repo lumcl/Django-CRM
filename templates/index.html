@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'crm/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/fontawesome-all.css' %}">
+    <script src="{% static 'crm/js/main.js' %}"></script>
+</head>
+<body>
+{% include "header.html" %}
+<main>
+    {% include "menu.html" %}
+</main>
+</body>
+</html>

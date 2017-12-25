@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<header>
+    <img class="logo" src="{% static 'crm/img/logo.png' %}" onclick="window.location='/';">
+    <div class="menu-item">
+        <i class="fas fa-search"></i>
+        <span>Search</span>
+    </div>
+    <div class="menu-item" onclick="window.location='/client/';">
+        <i class="far fa-address-card"></i>
+        <span>Clients</span>
+    </div>
+    <div class="menu-item">
+        <i class="far fa-user"></i>
+        <span>Contacts</span>
+    </div>
+    <div class="menu-item">
+        <i class="far fa-calendar"></i>
+        <span>Calendar</span>
+    </div>
+    <div class="menu-item">
+        <i class="fas fa-chart-line"></i>
+        <span>Charts</span>
+    </div>
+    <div class="menu-item">
+        <i class="far fa-comments"></i>
+        <span>Chat</span>
+    </div>
+    <div class="menu-item">
+        <i class="far fa-envelope"></i>
+        <span>Email</span>
+    </div>
+</header>
